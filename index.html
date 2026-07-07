@@ -210,6 +210,11 @@
     border: 2px solid var(--accent);
     color: var(--accent-dark);
   }
+  .ratio-result.state-info{
+    background: var(--bg-soft);
+    border: 2px solid var(--border);
+    color: var(--muted);
+  }
 
   /* ---------- Features ---------- */
   .section-title{
@@ -764,6 +769,8 @@
       }
     });
 
+    // 아래 목록은 상세 배합 한도가 등록된 예시 원료입니다.
+    // 목록에 없는 원료를 입력해도 checkRatio()의 폴백 분기에서 결과가 표시됩니다.
     const RATIO_DB = [
       { name:'나이아신아마이드', limit: 10, limitType:'guideline' },
       { name:'레티놀', limit: 1, limitType:'guideline' },
@@ -804,8 +811,8 @@
         });
 
         if (!match) {
-          resultEl.className = 'ratio-result visible state-warn';
-          resultEl.textContent = '"' + name + '"은 등록된 원료 데이터베이스에서 찾을 수 없습니다.';
+          resultEl.className = 'ratio-result visible state-info';
+          resultEl.textContent = 'ℹ️ "' + name + '" ' + pct + '% — 상세 배합 한도가 등록되어 있지 않은 원료입니다. 등록된 규정이 없으므로 최신 고시 및 안전성 자료를 별도로 확인해주세요.';
           return;
         }
 
